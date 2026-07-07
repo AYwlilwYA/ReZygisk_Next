@@ -1,0 +1,58 @@
+.clangd
+.clang-format
+.idea
+.vscode
+build
+__pycache__/
+*.pyc
+*.zip
+zygisk_next_extracted/
+*.tmp*
+.mcp.json
+CLAUDE.md
+
+# 敏感信息
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.pfx
+private_key
+public_key
+secrets.*
+credentials.*
+.env
+.env.*
+*.token
+*.secret
+module/private_key
+module/public_key
+
+# IDE / 编辑器
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 调试文件
+state.json
+core
+*.core
+valgrind*.log
+
+# 临时构建产物
+build.ps1
+pack.sh
+pack.py
+pack2.py
+
+reverse_engineering
+
+# 非核心构建文件（不提交到仓库）
+build.sh
+TRANSLATOR.md
+CHANGELOG.md
+update.json
+module/src/customize.sh.orig

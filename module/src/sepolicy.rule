@@ -1,0 +1,19 @@
+# ReZygisk Next — 最小化 SELinux 规则
+# 注: adb_data_file 规则为 APatch 策略加载机制所需,非 zygote 实际使用
+
+type zygisk_file file_type
+allow zygote zygisk_file sock_file {read write}
+
+allow zygote zygote capability sys_chroot
+allow zygote su dir search
+allow zygote su {lnk_file file} read
+allow zygote ksu dir search
+allow zygote ksu {lnk_file file} read
+
+allow zygote proc file {read open}
+allow zygote nsfs file {read open}
+
+allow zygote adb_data_file dir search
+allow zygote adb_data_file file *
+
+allow zygote system_lib_file file execmod
