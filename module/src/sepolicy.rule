@@ -1,0 +1,28 @@
+# ReZygisk Next — 最小化 SELinux 规则
+# 注: adb_data_file 规则为 APatch 策略加载机制所需,非 zygote 实际使用
+
+type zygisk_file file_type
+allow zygote zygisk_file sock_file {read write}
+
+allow zygote zygote capability sys_chroot
+allow zygote su dir search
+allow zygote su {lnk_file file} read
+allow zygote ksu dir search
+allow zygote ksu {lnk_file file} read
+
+# INFO: 打开 zygiskd 持有的 mnt ns fd（update_mnt_ns: open(/proc/<zygiskd_pid>/fd/N)）。
+#       APatch/Magisk 下 zygiskd 伪装进程（netd/logd/servicemanager）运行在 magisk 域，
+#       open 遍历 /proc/<pid>/fd 目录需 dir search，读 symlink 需 lnk_file read，
+#       读目标 fd 文件需 file read。仅 lnk_file read 时目录遍历即被拒，open 返回 EACCES（errno 13）。
+#       2026-08-04 真机 PJZ110/APatch 实测：QQ denylist 分支因缺 dir search 注入链中止。
+#       su/ksu 同型规则已存在，此处补齐 magisk 完整规则。
+allow zygote magisk dir search
+allow zygote magisk {lnk_file file} read
+
+allow zygote proc file {read open}
+allow zygote nsfs file {read open}
+
+allow zygote adb_data_file dir search
+allow zygote adb_data_file file *
+
+allow zygote system_lib_file file execmod

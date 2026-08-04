@@ -1,0 +1,8 @@
+id=${moduleId}
+name=${moduleName}
+version=${versionName}
+versionCode=${versionCode}
+author=AYwlilwYA & The PerformanC Organization
+description=ReZygisk Next - Enhanced Zygisk implementation with advanced stealth and anti-detection features. Supports Magisk, KernelSU, and APatch.
+updateJson=https://raw.githubusercontent.com/AYwlilwYA/ReZygisk_Next/main/update.json
+managedFeatures=kernel_umount
